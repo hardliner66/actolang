@@ -1,0 +1,12 @@
+[package]
+name = "actolang"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.96"
+either = "1.13.0"
+indexmap = "2.7.1"
+peg = "0.8.4"
+thiserror = "2.0.11"
+vec1 = "1.12.1"
