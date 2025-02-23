@@ -1,0 +1,22 @@
+import "some/path/to/file.act";
+
+atom @Add, @Sub, @Mul, @Div;
+
+// my cool comment
+
+struct SomeMessage <T> {
+  a: i32,
+  b: String
+}
+
+actor MyActor <T> {
+  some_state: String,
+
+  (@Add, i32, i32) -> {}
+}
+
+fn main() {
+
+}
+
+fn add(a: i32, b: std::vec::Vec<i32>) {}
