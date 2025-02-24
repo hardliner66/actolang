@@ -98,7 +98,7 @@ impl<T> Named<T> {
         Self { name, value }
     }
 
-    fn to_tuple(self) -> (String, T) {
+    fn into_tuple(self) -> (String, T) {
         (self.name, self.value)
     }
 }
@@ -131,7 +131,7 @@ peg::parser! {
     rule func() -> ParseResult<Named<Function>>
       = "fn" _ name:ident() _ "(" _ args:(arg:arg() ** "," { arg }) _ ")" _ "{" _ "}" {
           Ok(Named::new(name, Function {
-          args: args.into_iter().collect::<ParseResult<Vec<_>>>()?.into_iter().map(Named::to_tuple).collect()
+          args: args.into_iter().collect::<ParseResult<Vec<_>>>()?.into_iter().map(Named::into_tuple).collect()
         }))
       }
     / expected!("func")
@@ -144,7 +144,7 @@ peg::parser! {
       = _ "struct" _ name:ident() _ g:("<" _ gs:(typ() ** ",")  _ ">" { gs })? _ "{" _ ps:(property() ** ",") _ "}" {
         Ok(Named::new(name,
           Struct {
-            properties: ps.into_iter().collect::<ParseResult<Vec<_>>>()?.into_iter().map(Named::to_tuple).collect(),
+            properties: ps.into_iter().collect::<ParseResult<Vec<_>>>()?.into_iter().map(Named::into_tuple).collect(),
             generics: g.unwrap_or_default().into_iter().collect::<ParseResult<Vec<Typ>>>()?
           }
         ))
